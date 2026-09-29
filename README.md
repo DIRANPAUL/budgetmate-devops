@@ -74,7 +74,7 @@ server.js                   HTTP API (routing + handlers)
 lib/budgetLogic.js          Pure business logic (unit tested)
 lib/store.js                In-memory data store (seed data)
 test/                       25 automated tests (unit + integration)
-scripts/                    healthcheck.js, smoke-test.js, generate-release-notes.js
+scripts/                    healthcheck.js, smoke-check.js, generate-release-notes.js
 monitoring/                 Prometheus, Alertmanager, alert-on-failure.sh
 Dockerfile                  Multi-stage build (test -> minimal runtime image)
 docker-compose.staging.yml  Deploy-stage target

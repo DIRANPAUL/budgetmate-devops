@@ -123,7 +123,7 @@ pipeline {
         // Give the container's HEALTHCHECK a moment to go green before
         // hitting it directly with the smoke test.
         sh 'sleep 8'
-        sh "node scripts/smoke-test.js ${STAGING_URL}"
+        sh "node scripts/smoke-check.js ${STAGING_URL}"
       }
     }
 
@@ -151,7 +151,7 @@ pipeline {
         sh "docker tag ${IMAGE_NAME}:${IMAGE_TAG} ${IMAGE_NAME}:prod"
         sh "IMAGE_TAG=prod RELEASE_TAG=${RELEASE_TAG} docker compose -f docker-compose.prod.yml up -d"
         sh 'sleep 8'
-        sh "node scripts/smoke-test.js ${PROD_URL}"
+        sh "node scripts/smoke-check.js ${PROD_URL}"
       }
       post {
         success {

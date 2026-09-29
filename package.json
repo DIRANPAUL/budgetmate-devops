@@ -12,7 +12,7 @@
     "test": "node --test --test-reporter=spec --test-reporter-destination=stdout --test-reporter=junit --test-reporter-destination=test-results.xml",
     "lint": "eslint .",
     "healthcheck": "node scripts/healthcheck.js",
-    "smoke-test": "node scripts/smoke-test.js",
+    "smoke-check": "node scripts/smoke-check.js",
     "release-notes": "node scripts/generate-release-notes.js"
   },
   "dependencies": {},

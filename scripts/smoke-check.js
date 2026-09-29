@@ -2,14 +2,14 @@
 'use strict';
 
 /**
- * smoke-test.js
+ * smoke-check.js
  * -----------------------------------------------------------------------
  * Post-deploy smoke test run by the Jenkins "Deploy" stage immediately
  * after `docker compose -f docker-compose.staging.yml up -d --build`, to
  * confirm the freshly deployed container is actually serving real traffic
  * correctly before the pipeline is allowed to proceed to Release.
  *
- * Usage: node scripts/smoke-test.js http://localhost:3100
+ * Usage: node scripts/smoke-check.js http://localhost:3100
  * Exits non-zero (failing the Jenkins stage) on any check failure.
  * -----------------------------------------------------------------------
  */
