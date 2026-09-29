@@ -1,0 +1,14 @@
+route:
+  receiver: "console-and-webhook"
+  group_wait: 10s
+  group_interval: 1m
+  repeat_interval: 3h
+
+receivers:
+  - name: "console-and-webhook"
+    # Replace with a real Slack/Teams/email webhook before relying on this
+    # in a real deployment. Left generic so no personal webhook URL/secret
+    # needs to live in a student assignment repository.
+    webhook_configs:
+      - url: "http://host.docker.internal:3000/__no-op-alert-sink"
+        send_resolved: true

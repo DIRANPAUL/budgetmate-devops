@@ -1,0 +1,24 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+rule_files:
+  - "alert.rules.yml"
+
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets: ["alertmanager:9093"]
+
+scrape_configs:
+  - job_name: "budgetmate-api"
+    metrics_path: /metrics
+    static_configs:
+      # host.docker.internal lets the Prometheus container reach the
+      # BudgetMate container's published port from outside the compose
+      # network it was deployed on. Point this at the real prod host:port
+      # once deployed off a single dev machine.
+      - targets: ["host.docker.internal:3000"]
+        labels:
+          service: "budgetmate-api"
+          env: "production"

@@ -1,0 +1,20 @@
+groups:
+  - name: budgetmate-api-alerts
+    rules:
+      - alert: BudgetMateApiDown
+        expr: up{job="budgetmate-api"} == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "BudgetMate API is unreachable"
+          description: "Prometheus has failed to scrape /metrics from the BudgetMate API for over 1 minute. The production service is likely down."
+
+      - alert: BudgetMateApiElevatedErrorRate
+        expr: rate(budgetmate_errors_total[5m]) > 0.05
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "BudgetMate API is returning an elevated rate of 5xx errors"
+          description: "More than 5% of recent requests have failed for over 2 minutes. Investigate application logs before the error rate worsens."

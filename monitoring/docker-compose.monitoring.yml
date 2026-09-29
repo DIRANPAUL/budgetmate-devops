@@ -1,0 +1,31 @@
+# Monitoring stack used by the Jenkins "Monitoring" stage after a
+# production release. Prometheus scrapes BudgetMate's /metrics endpoint
+# (see server.js) on a 15s interval; Alertmanager fires when the alert
+# rules in alert.rules.yml trigger (service down, or elevated 5xx rate).
+#
+# Usage:
+#   docker compose -f monitoring/docker-compose.monitoring.yml up -d
+#   Prometheus UI:    http://localhost:9090
+#   Alertmanager UI:  http://localhost:9093
+
+services:
+  prometheus:
+    image: prom/prometheus:v2.54.1
+    container_name: budgetmate-prometheus
+    restart: unless-stopped
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - ./alert.rules.yml:/etc/prometheus/alert.rules.yml:ro
+    ports:
+      - "9090:9090"
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+
+  alertmanager:
+    image: prom/alertmanager:v0.27.0
+    container_name: budgetmate-alertmanager
+    restart: unless-stopped
+    volumes:
+      - ./alertmanager.yml:/etc/alertmanager/alertmanager.yml:ro
+    ports:
+      - "9093:9093"
