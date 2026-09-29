@@ -1,0 +1,22 @@
+# Production environment used by the Jenkins "Release" stage after a
+# staging deploy has passed its smoke test and been manually approved
+# (see the Jenkinsfile's `input` step before the Release stage runs).
+
+services:
+  budgetmate-api:
+    image: budgetmate-api:${IMAGE_TAG:-latest}
+    container_name: budgetmate-api-prod
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+    healthcheck:
+      test: ["CMD", "node", "scripts/healthcheck.js"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
+    labels:
+      - "budgetmate.release=${RELEASE_TAG:-unversioned}"

@@ -1,0 +1,24 @@
+# Staging environment used by the Jenkins "Deploy" stage.
+# Usage (also run automatically by the Jenkinsfile):
+#   docker compose -f docker-compose.staging.yml up -d --build
+#   node scripts/smoke-test.js http://localhost:3100
+
+services:
+  budgetmate-api-staging:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: budgetmate-api:${IMAGE_TAG:-staging}
+    container_name: budgetmate-api-staging
+    restart: unless-stopped
+    ports:
+      - "3100:3000"
+    environment:
+      - NODE_ENV=staging
+      - PORT=3000
+    healthcheck:
+      test: ["CMD", "node", "scripts/healthcheck.js"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
