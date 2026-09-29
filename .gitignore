@@ -1,0 +1,9 @@
+node_modules/
+test-results.xml
+eslint-report.json
+npm-audit-report.json
+trivy-report.json
+RELEASE_NOTES.md
+*.tar
+.DS_Store
+npm-debug.log*

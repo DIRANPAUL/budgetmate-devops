@@ -1,0 +1,28 @@
+{
+  "name": "budgetmate-api",
+  "version": "1.0.0",
+  "description": "BudgetMate budgeting API for Australian university students — CDR-aligned transaction categorisation, budget-status and savings-goal-projection engine, built for the SIT223/SIT753 DevOps pipeline task.",
+  "main": "server.js",
+  "private": true,
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test --test-reporter=spec --test-reporter-destination=stdout --test-reporter=junit --test-reporter-destination=test-results.xml",
+    "lint": "eslint .",
+    "healthcheck": "node scripts/healthcheck.js",
+    "smoke-test": "node scripts/smoke-test.js",
+    "release-notes": "node scripts/generate-release-notes.js"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "^9.9.0"
+  },
+  "author": "Diran Shenuk Paul De Silva Jayasinghage <s224764189@deakin.edu.au>",
+  "license": "UNLICENSED",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/YOUR_GITHUB_USERNAME/budgetmate-devops.git"
+  }
+}
